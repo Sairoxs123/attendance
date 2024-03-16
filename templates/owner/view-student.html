@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <style>
+        .container {
+            overflow-x: scroll;
+        }
+
+        .row {
+            display: flex;
+            width: 100%;
+        }
+
+        .flex {
+            min-width: 10%;
+            text-align: center;
+            background-color: yellow;
+            border: 2px solid;
+        }
+
+        .non-sticky {
+            display: flex;
+            width: 100%;
+        }
+
+        .fixed {
+            position: sticky;
+            left: 0;
+            background-color: white;
+            text-align: center;
+            width: 10%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div>
+        <h1>Filter: </h1>
+        <form>
+            <label>Enter month: </label>
+            <input type="text" name="month" placeholder="Enter number of month: " list="months">
+            <datalist id="months">
+                <option>January</option>
+                <option>February</option>
+                <option>March</option>
+                <option>April</option>
+                <option>May</option>
+                <option>June</option>
+                <option>July</option>
+                <option>August</option>
+                <option>September</option>
+                <option>October</option>
+                <option>November</option>
+                <option>December</option>
+            </datalist>
+            <input type="submit" value="Filter">
+        </form>
+    </div>
+
+    <br><br>
+
+    <div class="container">
+        {{ attendance|safe }}
+    </div>
+
+    <h4>Number of days present = {{ present }} / {{ total }}</h4>
+    <h4>Number of days absent = {{ absent }} / {{ total }}</h4>
+    <h4>Attendance percentage = {{ percentage }}%</h4>
+
+    <div id="myChart" style="width:100%; max-width:600px; height:500px;">
+    </div>
+
+    <script>
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        const present = Number("{{ percentage }}")
+        const absent = 100 - present
+
+        function drawChart() {
+
+            // Set Data
+            const data = google.visualization.arrayToDataTable([
+                ['', ''],
+                ["Present", present],
+                ["Absent", absent]
+            ]);
+
+            // Set Options
+            const options = {
+                title: 'Attendance Percentage',
+                is3D: true
+            };
+
+            // Draw
+            const chart = new google.visualization.PieChart(document.getElementById('myChart'));
+            chart.draw(data, options);
+
+        }
+    </script>
+
+</body>
+
+</html>

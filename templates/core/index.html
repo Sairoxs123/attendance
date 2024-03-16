@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Hello there&nbsp;&nbsp; <a href="{% url 'logout' %}">Logout</a></h1>
+    <a href="{% url 'add-student' %}">Add Student</a>
+
+    <form action="{% url 'mark-attendance' %}" method="post" id="form"></form>
+
+    <input type="hidden" name="class" value="{{ class }}" form="form">
+
+    <input type="date" name="date" form="form" max="{{ today }}">
+
+    <div id="attendance">
+
+    </div>
+
+    <script>
+        document.querySelector("input[type=date]").addEventListener("input", async () => {
+            let dateInput = document.querySelector('input[type=date]').value
+            const request = await fetch(`/attendance/get/?grade={{ class }}&date=${dateInput}`)
+            const response = await request.json()
+            document.querySelector("#attendance").innerHTML = response["students"]
+        })
+    </script>
+
+
+</body>
+
+</html>

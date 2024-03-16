@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="{% url 'view-attendance' %}">
+        <label>Class: </label>
+        <input name="grade" list="classList" placeholder="Select Class: ">
+        <datalist id="classList">
+            <option value="11A">11A</option>
+            <option value="11B">11B</option>
+            <option value="11C">11C</option>
+        </datalist>
+        <input type="submit" value="Fetch">
+    </form>
+</body>
+</html>

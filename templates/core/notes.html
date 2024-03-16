@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>Add Note: </h2>
+    <form action="" method="post" id="form"></form>
+
+    <div id="selected">
+
+    </div>
+
+    <input type="search" placeholder="Search by name: " id="search" oninput="search()">
+
+    <div id="students">
+        {% for i in students %}
+            <input type="checkbox" value="{{ i.id }}" id="{{ i.id }}" oninput="selectStudents(`{{ i.id }}`, `{{ i }} - {{ i.grade }}`)">{{ i }} - {{ i.grade }}
+        {% endfor %}
+    </div>
+
+
+    <script>
+        let selectedStudents = []
+        let names = []
+
+        const selectStudents = (id, name) => {
+            if (selectedStudents.includes(id)) {
+                selectedStudents = selectedStudents.filter((element) => element != id)
+                names = names.filter((element) => element != name)
+            } else {
+                selectedStudents.push(id)
+                names.push(name)
+            }
+
+            document.getElementById("selected").innerHTML = ""
+
+            for (let i = 0; i < names.length; i++) {
+                document.getElementById("selected").innerHTML += `
+                    <div>
+                        ${names[i]}
+                        <button onclick="remove(${i}, '${names[i]}')">X</button>
+                    </div>
+                `
+            }
+
+        }
+
+        const remove = (id, name) => {
+            selectedStudents = selectedStudents.filter((element) => element != id)
+            names = names.filter((element) => element != name)
+
+            document.getElementById("selected").innerHTML = ""
+
+            for (let i = 0; i < names.length; i++) {
+                document.getElementById("selected").innerHTML += `
+                    <div>
+                        ${names[i]}
+                        <button onclick="remove(${i}, ${names[i]})">X</button>
+                    </div>
+                `
+            }
+
+            document.getElementById(`${id + 1}`).checked = false
+
+        }
+
+        const search = async () => {
+            const name = document.getElementById("search").value;
+            const request = await fetch(`{% url 'search' %}?name=${name}`);
+            const response = await request.json()
+            const students = response["students"]
+            document.getElementById('students').innerHTML = ""
+            for (let i = 0; i < students.length; i++) {
+                document.getElementById('students').innerHTML += students[i]
+            }
+        }
+    </script>
+
+</body>
+
+</html>

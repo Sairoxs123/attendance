@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #ct-select:checked ~ #ct{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    {% if error == "exists" %}
+        <h1>Account already exists.</h1>
+
+    {% elif error == "password-no-match" %}
+        <h1>Passwords do not match.</h1>
+
+    {% endif %}
+
+    <form action="{% url 'signup' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <label>Name: </label>
+        <input type="text" name="name">
+
+        <br><br>
+
+        <label>Email: </label>
+        <input type="email" name="email">
+
+        <br><br>
+
+        <label>Password: </label>
+        <input type="password" name="password">
+
+        <br><br>
+
+        <label>Repeat Password: </label>
+        <input type="password" name="repass">
+
+        <br><br>
+
+        <label>Profile Pic (optional)</label>
+        <input type="file" name="pfp">
+
+        <br><br>
+
+        <label>Type: </label>
+        <input type="radio" name="type" value="1" id="ct-select">Class Teacher
+        <input type="radio" name="type" value="0">Subject Teacher
+
+        <br><br>
+
+        <div id="ct" hidden>
+            <label>Class Teacher for: </label>
+            <input type="text" name="class">
+        </div>
+
+        <br><br>
+
+        <input type="submit" value="Sign Up">
+
+    </form>
+</body>
+</html>

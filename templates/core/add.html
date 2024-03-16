@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    {% if error %}
+        <h1>Student already exists.</h1>
+
+    {% elif success %}
+        <h1>Student has been added.</h1>
+
+    {% endif %}
+
+    <form action="{% url 'add-student' %}" method="post">
+
+        {% csrf_token %}
+
+        <label>Name: </label>
+        <input type="text" name="name">
+
+        <br><br>
+
+        <label>JSSID: </label>
+        JSSPS<input type="text" name="jssid">
+
+        <br><br>
+
+        <label>Class: </label>
+        <input type="text" name="class">
+
+        <br><br>
+
+        <input type="submit" value="Add">
+
+    </form>
+
+    <script>
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        .container {
+            overflow-x: scroll;
+            height: 99%;
+            width: 99%;
+            position: fixed;
+        }
+
+        .row {
+            display: flex;
+            width: 100%;
+        }
+
+        .flex {
+            min-width: 10%;
+            text-align: center;
+            background-color: yellow;
+            border: 2px solid;
+        }
+
+        .non-sticky {
+            display: flex;
+            width: 100%;
+        }
+
+        .fixed {
+            position: sticky;
+            left: 0;
+            background-color: white;
+            text-align: center;
+            width: 10%;
+        }
+
+        .sticky{
+            position: fixed;
+            width: 10%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" id="container">
+        <div class="row">
+            <div class="fixed">
+                <h3>Name</h3>
+            </div>
+            <div class="non-sticky">
+                <div class="flex date">
+                    <h3>2024-03-04</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>2024-03-05</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>2024-03-06</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>2024-03-07</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>2024-03-08</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>2024-03-09</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>2024-03-10</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>2024-03-11</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>2024-03-12</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>2024-03-13</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>2024-03-14</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>2024-03-15</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="fixed">
+                <h3>Sai Teja</h3>
+            </div>
+            <div class="non-sticky">
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="fixed">
+                <h3>Ajay Jacob</h3>
+            </div>
+            <div class="non-sticky">
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="fixed">
+                <h3>Divyam</h3>
+            </div>
+            <div class="non-sticky">
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="fixed">
+                <h3>Sai Teja</h3>
+            </div>
+            <div class="non-sticky">
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="fixed">
+                <h3>Ajay Jacob</h3>
+            </div>
+            <div class="non-sticky">
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="fixed">
+                <h3>Divyam</h3>
+            </div>
+            <div class="non-sticky">
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="fixed">
+                <h3>Sai Teja</h3>
+            </div>
+            <div class="non-sticky">
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="fixed">
+                <h3>Ajay Jacob</h3>
+            </div>
+            <div class="non-sticky">
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="fixed">
+                <h3>Divyam</h3>
+            </div>
+            <div class="non-sticky">
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="fixed">
+                <h3>Sai Teja</h3>
+            </div>
+            <div class="non-sticky">
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="fixed">
+                <h3>Ajay Jacob</h3>
+            </div>
+            <div class="non-sticky">
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="fixed">
+                <h3>Divyam</h3>
+            </div>
+            <div class="non-sticky">
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="fixed">
+                <h3>Sai Teja</h3>
+            </div>
+            <div class="non-sticky">
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="fixed">
+                <h3>Ajay Jacob</h3>
+            </div>
+            <div class="non-sticky">
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="fixed">
+                <h3>Divyam</h3>
+            </div>
+            <div class="non-sticky">
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Absent</h3>
+                </div>
+
+                <div class="flex">
+                    <h3>Present</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
