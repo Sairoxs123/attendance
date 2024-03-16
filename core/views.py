@@ -191,7 +191,7 @@ def mobileMarkAttendance(request):
     attendance = jsdata["attendance"]
 
     for i in attendance:
-        student = Students.objects.get(name=i["name"])
+        student = Students.objects.get(id=i["id"])
         Attendance(student=student, date=date, grade=grade, present=i["present"]).save()
 
     return JsonResponse({"marked": True})
