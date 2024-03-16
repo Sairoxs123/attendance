@@ -1,7 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from core.models import *
-from dateutil.relativedelta import relativedelta
 
 # Create your views here.
 
