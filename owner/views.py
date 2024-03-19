@@ -1,3 +1,4 @@
+import json
 from django.http import HttpResponse
 from django.shortcuts import render
 from core.models import *
@@ -37,9 +38,15 @@ def viewAttendance(request):
 
     students = []
 
+    attendanceGraph = [
+        ["Students", "Attendance"]
+    ]
+
     for i in attendance:
         if i.student not in students:
             students.append(i.student)
+            present = 0
+            count = 0
             studentattendance = attendance.filter(student=i.student)
             html += f'<div class="row"><div class="fixed"><h3><a href="/owner/view/attendance/{i.student.jssid}/" target="_blank">{i.student.name}</a></h3></div><div class="non-sticky">'
             for j in studentattendance:
@@ -48,9 +55,19 @@ def viewAttendance(request):
                     <h3>{"Present" if j.present else "Absent"}</h3>
                 </div>
                 """
+                count += 1
+                if j.present:
+                    present += 1
+
+
+            percentage = round((present / count) * 100, 2)
+
+            attendanceGraph.append([i.student.name, percentage])
+
+
             html += "</div></div>"
 
-    return render(request, "owner/view.html", {"attendance": html})
+    return render(request, "owner/view.html", {"attendance": html, "graph":json.dumps(attendanceGraph)})
 
 
 def viewStudentAttendance(request, jssid):

@@ -1,32 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
     <style>
-        .container{
+        .container {
             overflow-x: scroll;
         }
 
-        .row{
+        .row {
             display: flex;
             width: 100%;
         }
 
-        .flex{
+        .flex {
             min-width: 10%;
             text-align: center;
             background-color: yellow;
             border: 2px solid;
         }
 
-        .non-sticky{
+        .non-sticky {
             display: flex;
             width: 100%;
         }
 
-        .fixed{
+        .fixed {
             position: sticky;
             left: 0;
             background-color: white;
@@ -35,9 +37,42 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         {{ attendance|safe }}
     </div>
+
+    <div id="graph" style="display: none;">
+        {{ graph }}
+    </div>
+
+    <div id="myChart" style="width:100%; max-width:100%; height:500px;"></div>
+
+    <script>
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+
+            const graphData = JSON.parse(document.getElementById("graph").innerHTML)
+
+            // Set Data
+            const data = google.visualization.arrayToDataTable(graphData);
+
+
+            // Set Options
+            const options = {
+                title: 'Student Attendance'
+            };
+
+            // Draw
+            const chart = new google.visualization.BarChart(document.getElementById('myChart'));
+            chart.draw(data, options);
+
+        }
+    </script>
+
 </body>
+
 </html>
