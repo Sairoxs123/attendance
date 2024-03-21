@@ -348,3 +348,13 @@ def createNotification(request):
     Notification(sent_by=sentinst, received_by=receivedinst, date=date, message=message, seen=False)
 
     return JsonResponse({"created":True})
+
+
+def notificationMarkAsRead(request):
+    id = request.GET.get("id")
+    notification = Notification.objects.get(id=id)
+    notification.seen = True
+
+    notification.save()
+
+    return JsonResponse({"marked":True})

@@ -15,5 +15,6 @@ urlpatterns = [
     path('details/fetch/students/mobile/', mobileGetStudents, name="mobile-students-fetch-details"),
     path('notes/mobile/create/', mobileCreateNote, name="mobile-create-note"),
     path('notes/mobile/fetch/', fetchNotes, name="mobile-fetch-notes"),
-    path('notes/mobile/delete/', deleteNote, name="mobile-delete-note")
+    path('notes/mobile/delete/', deleteNote, name="mobile-delete-note"),
+    path('notification/create/', createNotification, name="create-notification")
 ]
