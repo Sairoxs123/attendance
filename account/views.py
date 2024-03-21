@@ -137,7 +137,7 @@ def mobileLogin(request):
         if password == inst.password:
 
             if inst.ct:
-                return JsonResponse({"message":True, "teaches":inst.teaches, "name":inst.name})
+                return JsonResponse({"message":True, "teaches":inst.teaches, "name":inst.name, "email":inst.email})
 
             else:
                 return JsonResponse({"message":True, "name":inst.name})

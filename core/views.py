@@ -162,12 +162,15 @@ def search(request):
 def mobileGetAttendance(request):
     date = request.GET.get("date")
     grade = request.GET.get("grade")
+    teacheremail = request.GET.get("teacher")
 
-    attendance = Attendance.objects.all().filter(grade=grade).filter(date=date)
+    teacherinst = Teachers.objects.get(email=teacheremail)
+
+    attendance = Attendance.objects.all().filter(grade=grade).filter(date=date).filter(teacher=teacherinst)
 
     if len(attendance) > 0:
         return JsonResponse(
-            {"students": "Attendance has already been marked for the selected date."}
+            {"students": "Attendance has already been marked by you for the selected date."}
         )
 
     students = Students.objects.all().filter(grade=grade).order_by("name")
@@ -189,10 +192,38 @@ def mobileMarkAttendance(request):
     date = jsdata["date"]
     grade = jsdata["grade"]
     attendance = jsdata["attendance"]
+    email = jsdata["email"]
 
-    for i in attendance:
-        student = Students.objects.get(id=i["id"])
-        Attendance(student=student, date=date, grade=grade, present=i["present"]).save()
+    teacherinst = Teachers.objects.get(email=email)
+
+    if teacherinst.ct and teacherinst.teaches == grade:
+        for i in attendance:
+            student = Students.objects.get(id=i["id"])
+            Attendance(student=student, date=date, grade=grade, present=i["present"], ct=True, teacher=teacherinst).save()
+
+    else:
+        for i in attendance:
+            student = Students.objects.get(id=i["id"])
+            Attendance(student=student, date=date, grade=grade, present=i["present"], ct=False, teacher=teacherinst).save()
+
+    different = []
+
+    ct = Teachers.objects.get(teaches=grade)
+
+    ctattendance = Attendance.objects.all().filter(teacher=ct).filter(date=date).order_by("name")
+
+    markedattendance = Attendance.objects.all().filter(teacher=teacherinst).filter(date=date).order_by("name")
+
+    checker = lambda present: "Present" if present else "Absent"
+
+    for i in range(len(ctattendance)):
+        if ctattendance[i].present != markedattendance[i].present:
+            different.append(
+                f"The attendance for student {ctattendance[i].student.name} has been changed from {checker(ctattendance[i].present)} to {checker(markedattendance[i].present)}"
+            )
+
+    if len(different) > 0:
+        return JsonResponse({"changed":different, "date":date})
 
     return JsonResponse({"marked": True})
 
@@ -302,3 +333,18 @@ def deleteNote(request):
     Notes.objects.get(id=noteid).delete()
 
     return JsonResponse({"deleted":True})
+
+
+def createNotification(request):
+    sent = request.GET.get("sent")
+    received = request.GET.get("received")
+    date = request.GET.get("date")
+    message = request.GET.get("message")
+
+    sentinst = Teachers.objects.get(email=sent)
+    receivedinst = Teachers.objects.get(email=received)
+
+
+    Notification(sent_by=sentinst, received_by=receivedinst, date=date, message=message, seen=False)
+
+    return JsonResponse({"created":True})

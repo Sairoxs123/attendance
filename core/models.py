@@ -29,6 +29,8 @@ class Attendance(models.Model):
     grade = models.CharField("Class", max_length=3)
     date = models.DateField("Date")
     present = models.BooleanField("Present")
+    ct = models.BooleanField("Class Teacher")
+    teacher = models.ForeignKey(Teachers, on_delete=models.CASCADE)
 
 
 class Notes(models.Model):
@@ -39,3 +41,11 @@ class Notes(models.Model):
     students = models.ManyToManyField(Students, related_name="notes_students")
     date = models.DateField("Date")
 
+
+class Notification(models.Model):
+    id = models.IntegerField(primary_key=True, blank=False, null=False, unique=True)
+    sent_by = models.ForeignKey(Teachers, on_delete=models.CASCADE, related_name="sent_by")
+    received_by = models.ForeignKey(Teachers, on_delete=models.CASCADE, related_name="recieved_by")
+    date = models.DateField("Date")
+    message = models.CharField("Message", max_length=2048)
+    seen = models.BooleanField("Seen", default=False)

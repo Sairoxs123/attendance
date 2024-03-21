@@ -36,3 +36,11 @@ class NotesAdmin(admin.ModelAdmin):
     ordering = ["id"]
     search_fields = ["teacher", "date"]
     list_filter = ["date"]
+
+
+@admin.register(Notification)
+
+class NotificationAdmin(admin.ModelAdmin):
+    list_display = ["id", "sent_by", "received_by", "date", "seen"]
+    ordering = ["id"]
+    search_fields = ["date"]
