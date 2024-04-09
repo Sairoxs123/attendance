@@ -166,11 +166,18 @@ def mobileGetAttendance(request):
 
     teacherinst = Teachers.objects.get(email=teacheremail)
 
-    attendance = Attendance.objects.all().filter(grade=grade).filter(date=date).filter(teacher=teacherinst)
+    attendance = (
+        Attendance.objects.all()
+        .filter(grade=grade)
+        .filter(date=date)
+        .filter(teacher=teacherinst)
+    )
 
     if len(attendance) > 0:
         return JsonResponse(
-            {"students": "Attendance has already been marked by you for the selected date."}
+            {
+                "students": "Attendance has already been marked by you for the selected date."
+            }
         )
 
     students = Students.objects.all().filter(grade=grade).order_by("name")
@@ -178,9 +185,7 @@ def mobileGetAttendance(request):
     studentsList = []
 
     for i in students:
-        studentsList.append(
-            {"id":i.id, "name":i.name}
-        )
+        studentsList.append({"id": i.id, "name": i.name})
 
     return JsonResponse({"students": studentsList})
 
@@ -199,31 +204,57 @@ def mobileMarkAttendance(request):
     if teacherinst.ct and teacherinst.teaches == grade:
         for i in attendance:
             student = Students.objects.get(id=i["id"])
-            Attendance(student=student, date=date, grade=grade, present=i["present"], ct=True, teacher=teacherinst).save()
+            Attendance(
+                student=student,
+                date=date,
+                grade=grade,
+                present=i["present"],
+                ct=True,
+                teacher=teacherinst,
+            ).save()
 
     else:
         for i in attendance:
             student = Students.objects.get(id=i["id"])
-            Attendance(student=student, date=date, grade=grade, present=i["present"], ct=False, teacher=teacherinst).save()
+            Attendance(
+                student=student,
+                date=date,
+                grade=grade,
+                present=i["present"],
+                ct=False,
+                teacher=teacherinst,
+            ).save()
 
     different = []
 
     ct = Teachers.objects.get(teaches=grade)
 
-    ctattendance = Attendance.objects.all().filter(teacher=ct).filter(date=date).order_by("name")
+    ctattendance = (
+        Attendance.objects.all()
+        .filter(grade=grade)
+        .filter(teacher=ct)
+        .filter(date=date)
+        .order_by("student")
+    )
 
-    markedattendance = Attendance.objects.all().filter(teacher=teacherinst).filter(date=date).order_by("name")
+    markedattendance = (
+        Attendance.objects.all()
+        .filter(grade=grade)
+        .filter(teacher=teacherinst)
+        .filter(date=date)
+        .order_by("student")
+    )
 
     checker = lambda present: "Present" if present else "Absent"
 
     for i in range(len(ctattendance)):
         if ctattendance[i].present != markedattendance[i].present:
             different.append(
-                f"The attendance for student {ctattendance[i].student.name} has been changed from {checker(ctattendance[i].present)} to {checker(markedattendance[i].present)}"
+                f"The attendance for student {ctattendance[i].student.name} has been changed from {checker(ctattendance[i].present)} to {checker(markedattendance[i].present)}."
             )
 
     if len(different) > 0:
-        return JsonResponse({"changed":different, "date":date})
+        return JsonResponse({"changed": different, "date": date, "id":ct.email})
 
     return JsonResponse({"marked": True})
 
@@ -233,6 +264,7 @@ def mobileFetchDetails(request):
     date = request.GET.get("date")
     notesinst = Notes.objects.all().filter(date=date)
     students = Students.objects.all().filter(grade=grade)
+    teacher = Teachers.objects.get(teaches=grade)
 
     note = []
 
@@ -245,11 +277,24 @@ def mobileFetchDetails(request):
                 if j in students:
                     mentioned = []
                     for k in i.students.all():
-                        mentioned.append({"name":k.name, "grade":k.grade})
-                    note.append({"id": i.id, "title": i.title, "teacher": i.teacher.name, "description":i.description, "mentioned":mentioned})
+                        mentioned.append({"name": k.name, "grade": k.grade})
+                    note.append(
+                        {
+                            "id": i.id,
+                            "title": i.title,
+                            "teacher": i.teacher.name,
+                            "description": i.description,
+                            "mentioned": mentioned,
+                        }
+                    )
                     break
 
-    attendance = Attendance.objects.all().filter(grade=grade).filter(date=date)
+    attendance = (
+        Attendance.objects.all()
+        .filter(grade=grade)
+        .filter(date=date)
+        .filter(teacher=teacher)
+    )
 
     marked = []
 
@@ -264,15 +309,13 @@ def mobileFetchDetails(request):
 
 
 def mobileGetStudents(request):
-    temp = Students.objects.all().order_by("grade").order_by("name")
+    temp = Students.objects.all().order_by("name").order_by("grade")
     students = []
 
     for i in temp:
-        students.append(
-            {"label" : f"{i.name} {i.grade}", "value" : i.jssid}
-        )
+        students.append({"label": f"{i.name} {i.grade}", "value": i.jssid})
 
-    return JsonResponse({"students":students})
+    return JsonResponse({"students": students})
 
 
 @csrf_exempt
@@ -293,7 +336,9 @@ def mobileCreateNote(request):
     except:
         lid = 1
 
-    Notes(id=lid, teacher=teacher, title=title, description=description, date=date).save()
+    Notes(
+        id=lid, teacher=teacher, title=title, description=description, date=date
+    ).save()
 
     noteisnt = Notes.objects.get(id=lid)
 
@@ -314,40 +359,56 @@ def fetchNotes(request):
 
     notesinst = Notes.objects.all().filter(teacher=teacher)
 
-
     for i in notesinst:
         if i.date >= today:
             mentioned = []
             for j in i.students.all():
-                mentioned.append({"name":j.name, "grade":j.grade})
-            notes.append({"id": i.id, "title": i.title, "date":i.date, "description":i.description, "mentioned":mentioned})
+                mentioned.append({"name": j.name, "grade": j.grade})
+            notes.append(
+                {
+                    "id": i.id,
+                    "title": i.title,
+                    "date": i.date,
+                    "description": i.description,
+                    "mentioned": mentioned,
+                }
+            )
 
     if len(notes) == 0:
-        return JsonResponse({"notes":"You have no active notes."})
+        return JsonResponse({"notes": "You have no active notes."})
 
-    return JsonResponse({"notes":notes})
+    return JsonResponse({"notes": notes})
+
 
 def deleteNote(request):
     noteid = request.GET.get("id")
 
     Notes.objects.get(id=noteid).delete()
 
-    return JsonResponse({"deleted":True})
+    return JsonResponse({"deleted": True})
 
 
+#@csrf_exempt
 def createNotification(request):
     sent = request.GET.get("sent")
     received = request.GET.get("received")
     date = request.GET.get("date")
     message = request.GET.get("message")
 
+    return JsonResponse({"created":f"{sent} and {received}"})
+
     sentinst = Teachers.objects.get(email=sent)
     receivedinst = Teachers.objects.get(email=received)
 
+    Notification(
+        sent_by=sentinst,
+        received_by=receivedinst,
+        date=date,
+        message=message,
+        seen=False,
+    ).save()
 
-    Notification(sent_by=sentinst, received_by=receivedinst, date=date, message=message, seen=False)
-
-    return JsonResponse({"created":True})
+    return JsonResponse({"created": True})
 
 
 def notificationMarkAsRead(request):
@@ -357,4 +418,40 @@ def notificationMarkAsRead(request):
 
     notification.save()
 
-    return JsonResponse({"marked":True})
+    return JsonResponse({"marked": True})
+
+
+def getUnseenNotificationsCount(request):
+    email = request.GET.get("email")
+    teacher = Teachers.objects.get(email=email)
+
+    notifications = (
+        Notification.objects.all().filter(received_by=teacher).filter(seen=False)
+    )
+
+    return JsonResponse({"unseen": len(notifications)})
+
+
+def getNotifications(request):
+    email = request.GET.get("email")
+    teacher = Teachers.objects.get(email=email)
+
+    notifications = (
+        Notification.objects.all().filter(received_by=teacher)
+    )
+
+    unseen = []
+    seen = []
+
+    for i in notifications:
+        if i.seen:
+            seen.append(
+                {"id": i.id, "sent_by":i.sent_by.name, "date":i.date, "message":str(i.message).split(",")}
+            )
+
+        else:
+            unseen.append(
+                {"id": i.id, "sent_by":i.sent_by.name, "date":i.date, "message":str(i.message).split(",")}
+            )
+
+    return JsonResponse({"unseen":unseen, "seen":seen})

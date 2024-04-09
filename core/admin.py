@@ -23,10 +23,10 @@ class StudentsAdmin(admin.ModelAdmin):
 @admin.register(Attendance)
 
 class AttendanceAdmin(admin.ModelAdmin):
-    list_display = ["id", "student", "grade", "date", "present"]
+    list_display = ["id", "student", "grade", "date", "teacher", "present"]
     ordering = ["id"]
     search_fields = ["student", "date", "grade"]
-    list_filter = ["grade"]
+    list_filter = ["grade", "teacher"]
 
 
 @admin.register(Notes)

@@ -16,5 +16,8 @@ urlpatterns = [
     path('notes/mobile/create/', mobileCreateNote, name="mobile-create-note"),
     path('notes/mobile/fetch/', fetchNotes, name="mobile-fetch-notes"),
     path('notes/mobile/delete/', deleteNote, name="mobile-delete-note"),
-    path('notification/create/', createNotification, name="create-notification")
+    path('notifications/create/', createNotification, name="create-notification"),
+    path('nofitifications/get/unseen/count/', getUnseenNotificationsCount, name="get-unseen-notifications-count"),
+    path('nofitifications/get/unseen/', getNotifications, name="get-unseen-notifications"),
+    path('notifications/mark/read/', notificationMarkAsRead, name="mark-as-read")
 ]
