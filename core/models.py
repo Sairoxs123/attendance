@@ -29,6 +29,7 @@ class Attendance(models.Model):
     grade = models.CharField("Class", max_length=3)
     date = models.DateField("Date")
     present = models.BooleanField("Present")
+    sick = models.BooleanField("Sick", default=False)
     ct = models.BooleanField("Class Teacher")
     teacher = models.ForeignKey(Teachers, on_delete=models.CASCADE)
 

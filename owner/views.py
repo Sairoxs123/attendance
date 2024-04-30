@@ -12,7 +12,8 @@ def index(request):
 
 def viewAttendance(request):
     grade = request.GET.get("grade")
-    attendance = Attendance.objects.all().filter(grade=grade).order_by("date")
+    ct = Teachers.objects.get(teaches=grade)
+    attendance = Attendance.objects.all().filter(grade=grade).filter(teacher=ct).order_by("date")
 
     if len(attendance) == 0:
         return render(
@@ -72,7 +73,8 @@ def viewAttendance(request):
 
 def viewStudentAttendance(request, jssid):
     studentinst = Students.objects.get(jssid=jssid)
-    attendance = Attendance.objects.all().filter(student=studentinst).order_by("date")
+    ct = Teachers.objects.get(teaches=studentinst.grade)
+    attendance = Attendance.objects.all().filter(teacher=ct).filter(student=studentinst).order_by("date")
 
     filter = request.GET.get("month")
 

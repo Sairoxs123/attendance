@@ -23,7 +23,7 @@ class StudentsAdmin(admin.ModelAdmin):
 @admin.register(Attendance)
 
 class AttendanceAdmin(admin.ModelAdmin):
-    list_display = ["id", "student", "grade", "date", "teacher", "present"]
+    list_display = ["id", "student", "grade", "date", "teacher", "present", "sick"]
     ordering = ["id"]
     search_fields = ["student", "date", "grade"]
     list_filter = ["grade", "teacher"]

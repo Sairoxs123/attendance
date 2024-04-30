@@ -204,26 +204,54 @@ def mobileMarkAttendance(request):
     if teacherinst.ct and teacherinst.teaches == grade:
         for i in attendance:
             student = Students.objects.get(id=i["id"])
-            Attendance(
-                student=student,
-                date=date,
-                grade=grade,
-                present=i["present"],
-                ct=True,
-                teacher=teacherinst,
-            ).save()
+            if i["present"] == "Sick":
+
+                Attendance(
+                    student=student,
+                    date=date,
+                    grade=grade,
+                    present=False,
+                    sick=True,
+                    ct=True,
+                    teacher=teacherinst,
+                ).save()
+
+            else:
+
+                Attendance(
+                    student=student,
+                    date=date,
+                    grade=grade,
+                    present=i["present"],
+                    ct=True,
+                    teacher=teacherinst,
+                ).save()
 
     else:
         for i in attendance:
             student = Students.objects.get(id=i["id"])
-            Attendance(
-                student=student,
-                date=date,
-                grade=grade,
-                present=i["present"],
-                ct=False,
-                teacher=teacherinst,
-            ).save()
+            if i["present"] == "Sick":
+
+                Attendance(
+                    student=student,
+                    date=date,
+                    grade=grade,
+                    present=False,
+                    sick=True,
+                    ct=False,
+                    teacher=teacherinst,
+                ).save()
+
+
+            else:
+                Attendance(
+                    student=student,
+                    date=date,
+                    grade=grade,
+                    present=i["present"],
+                    ct=False,
+                    teacher=teacherinst,
+                ).save()
 
     different = []
 
@@ -394,8 +422,6 @@ def createNotification(request):
     received = request.GET.get("received")
     date = request.GET.get("date")
     message = request.GET.get("message")
-
-    return JsonResponse({"created":f"{sent} and {received}"})
 
     sentinst = Teachers.objects.get(email=sent)
     receivedinst = Teachers.objects.get(email=received)
